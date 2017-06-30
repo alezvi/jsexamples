@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calculadora</title>
+    </head>
+    <body>
+        <div id="calc">
+            <div id="calc-header">
+                <button onclick="Calc.turn()">On / Off</button>
+            </div>
+
+            <div id="calc-body" style="display:none">
+                <p id="screen" style="border:3px; font-weight:bold; font-family:Courier; color:gray">123</p>
+                          
+                <div>
+                    <button type="button" value="1" onclick="Calc.take(this.value)">1</button>
+                    <button type="button" value="2" onclick="Calc.take(this.value)">2</button>
+                    <button type="button" value="3" onclick="Calc.take(this.value)">3</button>
+                    <button type="button" value="add">+</button>
+                </div>
+                <div>
+                    <button type="button" value="4" onclick="Calc.take(this.value)">4</button>
+                    <button type="button" value="5" onclick="Calc.take(this.value)">5</button>
+                    <button type="button" value="6" onclick="Calc.take(this.value)">6</button>
+                    <button type="button" value="sub">-</button>
+                </div>
+                <div>
+                    <button type="button" value="7" onclick="Calc.take(this.value)">7</button>
+                    <button type="button" value="8" onclick="Calc.take(this.value)">8</button>
+                    <button type="button" value="9" onclick="Calc.take(this.value)">9</button>
+                    <button type="button" value="mul">*</button>
+                </div>
+                <div>
+                    <button>R</button>
+                    <button type="button" value="0" onclick="Calc.take(this.value)">0</button>
+                    <button>U</button>
+                    <button type="button" value="div">/</button>
+                </div>
+                <div>
+                    <button onclick="Calc.getResult()">=</button>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+        var Calc = {
+          powered : false,
+          result : 0,
+          input : 0,
+          screen : function () {
+            return document.getElementById('screen');
+          },
+          take : function (v) {
+            this.input = v;
+            document.getElementById('screen').innerHTML = v;
+            return this;
+          },
+          turn : function () {
+            this.powered = ! this.powered;
+
+            var body = document.getElementById('calc-body');
+
+            body.style.display = this.powered ? 'inline' : 'none'
+          }
+        }
+        </script>
+    </body>
+</html>
