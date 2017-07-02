@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Validation example with javascript</title>
+    </head>
+    <body>
+
+        <form onsubmit="confirmBeforeSave(this)">
+
+            <div>
+                <label>Name:</label>
+                <input type="text" />
+            </div>
+
+            <div>
+                <label>Password:</label>
+                <input type="password" onkeyup="Validator.password(this.value)" />
+            </div>
+
+            <div>
+                <label>Age:</label>
+                <input type="text" onkeyup="Validator.age(this.value)" />
+            </div>
+
+            <div>
+                <label>Description:</label>
+                <input type="text" onkeyup="Validator.notEmpty(this.value)" />
+            </div>
+
+            <div>
+                <label>I agree with TOS</label>
+                <input type="checkbox" onkeyup="Validator.checked(this)" />
+            </div>
+
+            <div>
+                <label>Country</label>
+                <select onchange="Validator.country(this.value)">
+                    <option>Select...</option>
+                    <option value="AR">Argentina</option>
+                    <option value="BR">Brasil</option>
+                    <option value="CH">Chile</option>
+                </select>
+            </div>
+
+            <div>
+                <div>
+                    <input value="male"><label>Hombre</label>
+                </div>
+                <div>
+                    <input value="female"><label>Mujer</label>
+                </div>
+            </div>
+            
+            <div>
+                <input type="submit" />
+            </div>
+
+        </form>
+
+        <script type="text/javascript">
+
+            function confirmBeforeSave(element) {
+                var button = document.createElement('button')
+
+                button.innerHTML = 'Confirma que desea enviar el formulario?'
+
+                button.onclick = function() {
+                    button.innerHTML = 'El formulario ha sido enviado!'
+                }
+
+                return element.appendChild(button);
+            }
+
+            var Validator = function () {
+                return {
+
+                    showError : function (element, message) {
+                        element.display = 'inline';
+                        element.style.border = '1px red';
+                        element.innerHTML = message;
+                    },
+
+                    hideError : function (element) {
+                        element.display = 'inline';
+                    },
+
+                    isName : function(value, message) {
+                        return (new RegExp(/\w{3,16}/i)).test(value)
+                    },
+
+                    isMobile : function(value, message) {
+                        var value = value.split('').filter(function (i,v) {
+                            return ! isNaN(i);
+                        });
+
+                        return value.join('');
+                    },
+
+                    checked : function(input, message) {
+                        return input.checked;
+                    },
+
+                    notEmpty : function(value, message) {
+                        return value.length > 0;
+                    },
+
+                    isUnderage : function(value, message) {
+                        if (isNaN(value)) return false;
+
+                        return parseInt(value) >= 18;
+                    }
+
+                };
+            }
+
+        </script>
+
+    </body>
+</html>
