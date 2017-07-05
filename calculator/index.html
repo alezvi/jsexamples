@@ -5,13 +5,14 @@
         <title>Calculadora</title>
     </head>
     <body>
+
         <div id="calc">
             <div id="calc-header">
-                <button onclick="Calc.turn()">On / Off</button>
+                <button onclick="calcTurn()">On / Off</button>
             </div>
 
             <div id="calc-body" style="display:none">
-                <p id="screen" style="border:3px; font-weight:bold; font-family:Courier; color:gray">123</p>
+                <p id="screen" style="border:3px; font-weight:bold; font-family:Courier; color:gray"></p>
                           
                 <div>
                     <button type="button" value="1" onclick="Calc.take(this.value)">1</button>
@@ -35,10 +36,10 @@
                     <button>R</button>
                     <button type="button" value="0" onclick="Calc.take(this.value)">0</button>
                     <button>U</button>
-                    <button type="button" value="div">/</button>
+                    <button type="button" value="div" onclic="Calc.operate('/')">/</button>
                 </div>
                 <div>
-                    <button onclick="Calc.getResult()">=</button>
+                    <button onclick="Calc.result()">=</button>
                 </div>
             </div>
         </div>
@@ -47,7 +48,24 @@
         var Calc = {
           powered : false,
           result : 0,
-          input : 0,
+          inputs : 0,
+          operation : null,
+          operate : function(operation, left) {
+          	switch (operate) {
+            	case 'add' :
+              	this.result = input + left;
+              break;
+            	case 'sub' :
+              	this.result = input - left;
+              break;
+            	case 'mul' :
+              	this.result = input * left;
+              break;
+            	case 'div' :
+              	this.result = input / left;
+              break;
+            }
+          },
           screen : function () {
             return document.getElementById('screen');
           },
@@ -58,11 +76,21 @@
           },
           turn : function () {
             this.powered = ! this.powered;
-
             var body = document.getElementById('calc-body');
-
             body.style.display = this.powered ? 'inline' : 'none'
+            this.reset();
+          },
+					result : function () {
+          	this.screen.innerHTML = this.result;
+					},
+          reset : function () {
+          	this.result = 0;
+						this.input = 0;
           }
+        }
+        
+        function calcTurn() {
+        	Calc.turn();
         }
         </script>
     </body>
