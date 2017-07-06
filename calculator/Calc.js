@@ -1,3 +1,7 @@
+/**
+ * @author Alejandro Villafane <info@alezvi.com.ar>
+ */
+
 var Calc = {
     history : [],
     result : 0,
