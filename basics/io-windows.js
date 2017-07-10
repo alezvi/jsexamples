@@ -6,6 +6,6 @@ var yourName = prompt('Your name is...')
 var wantSeeAlert = confirm('Do you want see the alert message?')
 
 // Alert is an output window
-if (yourName != null && wantSeeAlert) {
+if (yourName.length > 0 && wantSeeAlert) {
     alert('Your name is ' + yourName)
 }
